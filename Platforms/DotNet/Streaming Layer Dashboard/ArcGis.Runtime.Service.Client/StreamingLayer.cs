@@ -70,6 +70,9 @@ namespace ArcGis.Runtime.Service.Client
                 //var messageAsUtf8 = Encoding.UTF8.GetString(buffer);
                 //Trace.WriteLine(messageAsUtf8);
             }
+
+            // Add the graphics to the layer
+            Graphics.AddRange(graphicsBuilder.Graphics);
         }
 
         /// <summary>

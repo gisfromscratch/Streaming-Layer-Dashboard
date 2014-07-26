@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 using Esri.ArcGISRuntime.Layers;
 
+using Newtonsoft.Json;
+
 namespace ArcGis.Runtime.Service.Client
 {
     /// <summary>
@@ -21,17 +23,34 @@ namespace ArcGis.Runtime.Service.Client
 
         internal GraphicsFromStreamBuilder()
         {
-            _serializer = new DataContractJsonSerializer(typeof(List<Graphic>));
+            _serializer = new DataContractJsonSerializer(typeof(List<List<StreamGraphic>>));
             _graphics = new List<Graphic>();
         }
         
         public bool Visit(StreamMessage message)
         {
-            using (var memoryStream = new MemoryStream(message.RawBytes))
+            try
             {
-                var graphics = _serializer.ReadObject(memoryStream);
+                var messageAsJson = Encoding.UTF8.GetString(message.RawBytes);
+                var streamGraphics = JsonConvert.DeserializeObject<List<StreamGraphic>>(messageAsJson);
+                foreach (var streamGraphic in streamGraphics)
+                {
+                    _graphics.Add(new Graphic(streamGraphic.Geometry, streamGraphic.Attributes));
+                }
+                return true;
             }
-            return true;    
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public ICollection<Graphic> Graphics
+        {
+            get
+            {
+                return _graphics;
+            }
         }
     }
 }

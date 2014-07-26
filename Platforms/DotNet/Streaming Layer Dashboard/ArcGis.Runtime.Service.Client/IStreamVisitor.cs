@@ -16,6 +16,6 @@ namespace ArcGis.Runtime.Service.Client
         /// </summary>
         /// <param name="message">The message containing the serialized features.</param>
         /// <returns><c>false</c> if the next stream message should not be delegated to this visitor instance.</returns>
-        bool visit(StreamMessage message);
+        bool Visit(StreamMessage message);
     }
 }

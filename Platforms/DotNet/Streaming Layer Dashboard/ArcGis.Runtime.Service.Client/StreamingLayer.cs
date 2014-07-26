@@ -34,6 +34,8 @@ namespace ArcGis.Runtime.Service.Client
         {
             await _socket.ConnectAsync(_url, cancellationToken);
 
+            var graphicsBuilder = new GraphicsFromStreamBuilder();
+
             const int ChunkSize = 1024;
             var buffer = new byte[ChunkSize];
             var ready = true;
@@ -64,8 +66,9 @@ namespace ArcGis.Runtime.Service.Client
                 }
 
                 // TODO: Analyze message
-                var messageAsUtf8 = Encoding.UTF8.GetString(buffer);
-                Trace.WriteLine(messageAsUtf8);
+                graphicsBuilder.Visit(new StreamMessage(buffer));
+                //var messageAsUtf8 = Encoding.UTF8.GetString(buffer);
+                //Trace.WriteLine(messageAsUtf8);
             }
         }
 

@@ -24,7 +24,15 @@ namespace ArcGis.Runtime.Service.Client
         {
             _socket = new ClientWebSocket();
             _url = new Uri(url);
+
+            GraphicsThresold = 5;
         }
+
+        /// <summary>
+        /// The thresold for adding graphics delivered by stream messages to this layer.
+        /// If this value is set to one, every new obtained graphic is added to this layer immediately.
+        /// </summary>
+        public int GraphicsThresold { get; set; }
 
         /// <summary>
         /// Starts connecting to the Streaming Service,
@@ -56,7 +64,7 @@ namespace ArcGis.Runtime.Service.Client
                     if (buffer.Length <= messageSize)
                     {
                         // TODO: Handle Invalid Payload
-                        await _socket.CloseAsync(WebSocketCloseStatus.InvalidPayloadData, "Buffer exceeded!", CancellationToken.None);
+                        await _socket.CloseAsync(WebSocketCloseStatus.InvalidPayloadData, @"Buffer exceeded!", CancellationToken.None);
                         return;
                     }
 
@@ -67,12 +75,24 @@ namespace ArcGis.Runtime.Service.Client
 
                 // TODO: Analyze message
                 graphicsBuilder.Visit(new StreamMessage(buffer));
-                //var messageAsUtf8 = Encoding.UTF8.GetString(buffer);
-                //Trace.WriteLine(messageAsUtf8);
+                if (GraphicsThresold <= graphicsBuilder.Graphics.Count)
+                {
+                    AddGraphicsFromBuilder(graphicsBuilder);
+                }
             }
 
-            // Add the graphics to the layer
-            Graphics.AddRange(graphicsBuilder.Graphics);
+            AddGraphicsFromBuilder(graphicsBuilder);
+        }
+
+        /// <summary>
+        /// Adds the obtained graphics to this layer
+        /// </summary>
+        /// <param name="graphicsBuilder">The builder for the graphics.</param>
+        private void AddGraphicsFromBuilder(GraphicsFromStreamBuilder graphicsBuilder)
+        {
+            var newGraphics = graphicsBuilder.Graphics;
+            Graphics.AddRange(newGraphics);
+            newGraphics.Clear();
         }
 
         /// <summary>

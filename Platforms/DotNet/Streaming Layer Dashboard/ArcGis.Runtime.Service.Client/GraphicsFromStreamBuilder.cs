@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
@@ -32,6 +33,8 @@ namespace ArcGis.Runtime.Service.Client
             try
             {
                 var messageAsJson = Encoding.UTF8.GetString(message.RawBytes);
+                messageAsJson = messageAsJson.Replace("\\\"", "\"");
+                File.AppendAllText(@"C:\data\stream.json", messageAsJson);
                 var streamGraphics = JsonConvert.DeserializeObject<List<StreamGraphic>>(messageAsJson);
                 foreach (var streamGraphic in streamGraphics)
                 {
@@ -39,8 +42,9 @@ namespace ArcGis.Runtime.Service.Client
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Trace.WriteLine(ex.Message);
                 return false;
             }
         }

@@ -6,7 +6,7 @@
     <ProjectGuid>{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client_Testing</RootNamespace>
+    <RootNamespace>Client.Testing</RootNamespace>
     <AssemblyName>Client Testing</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

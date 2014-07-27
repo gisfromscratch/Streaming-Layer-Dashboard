@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ArcGis.Runtime.Service.Client;
 
-namespace Client_Testing
+namespace Client.Testing
 {
     [TestClass]
     public class StreamingLayerTests

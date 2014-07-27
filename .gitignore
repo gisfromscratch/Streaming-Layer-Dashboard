@@ -1,6 +1,6 @@
-/Platforms/DotNet/Streaming Layer Dashboard/TestResults
-/Platforms/DotNet/Streaming Layer Dashboard/Client Testing/obj
-/Platforms/DotNet/Streaming Layer Dashboard/Client Testing/bin
-/Platforms/DotNet/Streaming Layer Dashboard/ArcGis.Runtime.Service.Client/obj
-/Platforms/DotNet/Streaming Layer Dashboard/ArcGis.Runtime.Service.Client/bin
+bin/
+obj/
+TestResults/
+/Platforms/DotNet/Streaming Layer Dashboard/*.dll
+/Platforms/DotNet/Streaming Layer Dashboard/*.pdb
 /Platforms/DotNet/Streaming Layer Dashboard/*.suo

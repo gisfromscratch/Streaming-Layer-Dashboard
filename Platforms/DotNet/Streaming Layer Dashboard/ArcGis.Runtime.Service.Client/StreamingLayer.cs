@@ -46,15 +46,13 @@ namespace ArcGis.Runtime.Service.Client
 
             const int ChunkSize = 1024;
             var buffer = new byte[ChunkSize];
-            var ready = true;
-            while (ready)
+            var bufferSegment = new ArraySegment<byte>(buffer);
+            while (WebSocketState.Open == _socket.State)
             {
-                var bufferSegment = new ArraySegment<byte>(buffer);
                 var messageTask = await _socket.ReceiveAsync(bufferSegment, cancellationToken);
                 switch (messageTask.MessageType)
                 {
                     case WebSocketMessageType.Close:
-                        ready = false;
                         break;
                 }
 
@@ -74,7 +72,8 @@ namespace ArcGis.Runtime.Service.Client
                 }
 
                 // TODO: Analyze message
-                graphicsBuilder.Visit(new StreamMessage(buffer));
+                var receivedBytes = bufferSegment.Skip<byte>(bufferSegment.Offset).Take<byte>(messageSize).ToArray<byte>();
+                graphicsBuilder.Visit(new StreamMessage(receivedBytes));
                 if (GraphicsThresold <= graphicsBuilder.Graphics.Count)
                 {
                     AddGraphicsFromBuilder(graphicsBuilder);

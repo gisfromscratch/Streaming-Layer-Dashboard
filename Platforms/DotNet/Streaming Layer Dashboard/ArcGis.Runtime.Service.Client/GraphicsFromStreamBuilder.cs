@@ -7,7 +7,9 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 
 using Newtonsoft.Json;
 
@@ -33,12 +35,20 @@ namespace ArcGis.Runtime.Service.Client
             try
             {
                 var messageAsJson = Encoding.UTF8.GetString(message.RawBytes);
-                messageAsJson = messageAsJson.Replace("\\\"", "\"");
-                File.AppendAllText(@"C:\data\stream.json", messageAsJson);
+                //messageAsJson = messageAsJson.Replace("\\\"", "\"");
                 var streamGraphics = JsonConvert.DeserializeObject<List<StreamGraphic>>(messageAsJson);
                 foreach (var streamGraphic in streamGraphics)
                 {
-                    _graphics.Add(new Graphic(streamGraphic.Geometry, streamGraphic.Attributes));
+                    var newGraphic = new Graphic(streamGraphic.Geometry, streamGraphic.Attributes);
+                    
+                    // TODO: Create symbology
+                    switch (newGraphic.Geometry.GeometryType)
+                    {
+                        case GeometryType.Point:
+                            newGraphic.Symbol = new SimpleMarkerSymbol();
+                            break;
+                    }
+                    _graphics.Add(newGraphic);
                 }
                 return true;
             }

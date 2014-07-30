@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
@@ -45,7 +46,9 @@ namespace ArcGis.Runtime.Service.Client
                     switch (newGraphic.Geometry.GeometryType)
                     {
                         case GeometryType.Point:
-                            newGraphic.Symbol = new SimpleMarkerSymbol();
+                            var pointSymbol = new SimpleMarkerSymbol();
+                            pointSymbol.Color = Colors.White;
+                            newGraphic.Symbol = pointSymbol;
                             break;
                     }
                     _graphics.Add(newGraphic);

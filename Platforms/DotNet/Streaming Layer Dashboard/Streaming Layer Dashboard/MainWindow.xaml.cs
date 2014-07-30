@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using ArcGis.Runtime.Service.Client;
+using ArcGis.Runtime.StreamingLayerDashboard.Model;
 
 namespace ArcGis.Runtime.StreamingLayerDashboard
 {
@@ -39,6 +40,8 @@ namespace ArcGis.Runtime.StreamingLayerDashboard
             MapView.Map.Layers.Add(streamingLayer);
          
             var connectTask = streamingLayer.ConnectAsync(CancellationToken.None);
+            var layerCollection = (StreamingLayerCollection) StreamingLayerGrid.ItemsSource;
+            layerCollection.Add(streamingLayer);
         }
     }
 }

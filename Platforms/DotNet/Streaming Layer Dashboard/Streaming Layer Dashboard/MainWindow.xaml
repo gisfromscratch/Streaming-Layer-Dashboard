@@ -16,7 +16,7 @@
         <Expander Grid.Row="0" VerticalAlignment="Bottom">
             
             <!-- Streaming Layer Overview -->
-            <DataGrid Height="100px" ItemsSource="{Binding FocusMap}">
+            <DataGrid x:Name="StreamingLayerGrid" Height="100px" ItemsSource="{Binding Source={StaticResource StreamingLayers}}">
                 <DataGrid.Columns>
                     
                     <!-- Layer Visible Column -->

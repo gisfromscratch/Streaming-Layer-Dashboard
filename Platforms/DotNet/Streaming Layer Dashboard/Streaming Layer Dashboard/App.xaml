@@ -2,13 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:Model="clr-namespace:ArcGis.Runtime.StreamingLayerDashboard.Model"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
         <!-- Map showing some basemap -->
         <esri:Map x:Key="FocusMap" x:Name="FocusMap">
             <!-- Basemap from ArcGIS Online -->
             <esri:ArcGISTiledMapServiceLayer ID="World Map" 
                       ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer"/>
         </esri:Map>
+
+        <!-- List of streaming layers -->
+        <Model:StreamingLayerCollection x:Key="StreamingLayers">
+        </Model:StreamingLayerCollection>
+
     </Application.Resources>
 </Application>

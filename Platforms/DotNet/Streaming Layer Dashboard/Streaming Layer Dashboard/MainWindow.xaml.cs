@@ -36,7 +36,7 @@ namespace ArcGis.Runtime.StreamingLayerDashboard
         private void ConnectToStreamingService(string url)
         {
             var streamingLayer = new StreamingLayer(url);
-            FocusMap.Layers.Add(streamingLayer);
+            MapView.Map.Layers.Add(streamingLayer);
          
             var connectTask = streamingLayer.ConnectAsync(CancellationToken.None);
         }

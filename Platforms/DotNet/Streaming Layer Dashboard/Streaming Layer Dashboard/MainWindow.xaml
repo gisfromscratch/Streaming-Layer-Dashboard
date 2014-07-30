@@ -9,20 +9,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <esri:MapView Grid.Row="0">
-            <!-- Map showing some basemap -->
-            <esri:Map x:Name="FocusMap">
-                <!-- Basemap from ArcGIS Online -->
-                <esri:ArcGISTiledMapServiceLayer ID="World Map" 
-                      ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer"/>
-            </esri:Map>
+
+        <esri:MapView x:Name="MapView" Map="{Binding Source={StaticResource FocusMap}}" Grid.Row="0">
         </esri:MapView>
         
         <Expander Grid.Row="0" VerticalAlignment="Bottom">
             
             <!-- Streaming Layer Overview -->
-            <DataGrid Height="100px">
+            <DataGrid Height="100px" ItemsSource="{Binding FocusMap}">
                 <DataGrid.Columns>
                     
                     <!-- Layer Visible Column -->

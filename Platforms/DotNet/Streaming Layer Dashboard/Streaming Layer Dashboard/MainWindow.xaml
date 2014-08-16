@@ -1,0 +1,53 @@
+﻿<Window x:Class="ArcGis.Runtime.StreamingLayerDashboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        Title="Streaming Layer Dashboard" Height="600" Width="800">
+    <Grid>
+        
+        <!-- Grid Layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <esri:MapView x:Name="MapView" Map="{Binding Source={StaticResource FocusMap}}" Grid.Row="0">
+        </esri:MapView>
+        
+        <Expander Grid.Row="0" VerticalAlignment="Bottom">
+            
+            <!-- Streaming Layer Overview -->
+            <DataGrid x:Name="StreamingLayerGrid" Height="100px" ItemsSource="{Binding Source={StaticResource StreamingLayers}}">
+                <DataGrid.Columns>
+                    
+                    <!-- Layer Visible Column -->
+                    <DataGridTemplateColumn Header="Visible">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- Layer Url Column -->
+                    <DataGridTemplateColumn Header="Url" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Expander>
+
+        <!-- Add Streaming Service -->
+        <StackPanel Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Background="White"
+                    Orientation="Vertical">
+            
+            <!-- Connect button -->
+            <Button Margin="3" Content="Connect" Click="Connect" />
+            
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcGis.Runtime.Service.Client", "ArcGis.Runtime.Service.Client\ArcGis.Runtime.Service.Client.csproj", "{5E4419BD-CB8E-48C7-A7B0-B1868E240A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client Testing", "Client Testing\Client Testing.csproj", "{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streaming Layer Dashboard", "Streaming Layer Dashboard\Streaming Layer Dashboard.csproj", "{7859005F-C9FD-4E60-9C64-023140F2CC4A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E4419BD-CB8E-48C7-A7B0-B1868E240A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E4419BD-CB8E-48C7-A7B0-B1868E240A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4419BD-CB8E-48C7-A7B0-B1868E240A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4419BD-CB8E-48C7-A7B0-B1868E240A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{036E1C73-C0ED-4F23-A3EE-04E5F0AEF331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7859005F-C9FD-4E60-9C64-023140F2CC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7859005F-C9FD-4E60-9C64-023140F2CC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7859005F-C9FD-4E60-9C64-023140F2CC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7859005F-C9FD-4E60-9C64-023140F2CC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

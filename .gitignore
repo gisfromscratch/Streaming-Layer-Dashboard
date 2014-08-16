@@ -1,0 +1,6 @@
+bin/
+obj/
+TestResults/
+/Platforms/DotNet/Streaming Layer Dashboard/*.dll
+/Platforms/DotNet/Streaming Layer Dashboard/*.pdb
+/Platforms/DotNet/Streaming Layer Dashboard/*.suo

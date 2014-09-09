@@ -16,14 +16,14 @@
         <Expander Grid.Row="0" VerticalAlignment="Bottom">
             
             <!-- Streaming Layer Overview -->
-            <DataGrid x:Name="StreamingLayerGrid" Height="100px" ItemsSource="{Binding Source={StaticResource StreamingLayers}}">
+            <DataGrid x:Name="StreamingLayerGrid" Height="100px" ItemsSource="{Binding Source={StaticResource StreamingLayers}}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     
                     <!-- Layer Visible Column -->
                     <DataGridTemplateColumn Header="Visible">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox />
+                                <CheckBox IsChecked="{Binding Path=IsVisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -32,7 +32,7 @@
                     <DataGridTemplateColumn Header="Url" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox />
+                                <TextBlock Text="{Binding Path=Url}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

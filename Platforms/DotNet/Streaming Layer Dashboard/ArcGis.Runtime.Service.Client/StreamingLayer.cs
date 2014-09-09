@@ -18,12 +18,10 @@ namespace ArcGis.Runtime.Service.Client
     {
         private readonly ClientWebSocket _socket;
 
-        private readonly Uri _url;
-
         public StreamingLayer(String url)
         {
             _socket = new ClientWebSocket();
-            _url = new Uri(url);
+            Url = new Uri(url);
 
             GraphicsThresold = 5;
         }
@@ -34,13 +32,15 @@ namespace ArcGis.Runtime.Service.Client
         /// </summary>
         public int GraphicsThresold { get; set; }
 
+        public Uri Url { get; private set; }
+
         /// <summary>
         /// Starts connecting to the Streaming Service,
         /// </summary>
         /// <param name="cancellationToken">The cancelation token for this request.</param>
         public async Task ConnectAsync(CancellationToken cancellationToken)
         {
-            await _socket.ConnectAsync(_url, cancellationToken);
+            await _socket.ConnectAsync(Url, cancellationToken);
 
             var graphicsBuilder = new GraphicsFromStreamBuilder();
 

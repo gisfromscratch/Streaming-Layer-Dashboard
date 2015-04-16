@@ -20,6 +20,7 @@ namespace ArcGis.Runtime.Service.Client
 
         public StreamingLayer(String url)
         {
+            // TODO: This will only work on Windows 8.x
             _socket = new ClientWebSocket();
             Url = new Uri(url);
 

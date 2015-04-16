@@ -16,12 +16,11 @@ namespace ArcGis.Runtime.Service.Client
     /// </summary>
     public class StreamingLayer : GraphicsLayer
     {
-        private readonly ClientWebSocket _socket;
+        private readonly IWebSocket _socket;
 
         public StreamingLayer(String url)
         {
-            // TODO: This will only work on Windows 8.x
-            _socket = new ClientWebSocket();
+            _socket = new WebSocketFactory().CreateWebSocket();
             Url = new Uri(url);
 
             GraphicsThresold = 5;
@@ -41,46 +40,14 @@ namespace ArcGis.Runtime.Service.Client
         /// <param name="cancellationToken">The cancelation token for this request.</param>
         public async Task ConnectAsync(CancellationToken cancellationToken)
         {
+            _socket.BytesReceived += BytesReceived;
             await _socket.ConnectAsync(Url, cancellationToken);
+        }
 
+        private void BytesReceived(object sender, ReceiveEventArgs e)
+        {
             var graphicsBuilder = new GraphicsFromStreamBuilder();
-
-            const int ChunkSize = 1024;
-            var buffer = new byte[ChunkSize];
-            var bufferSegment = new ArraySegment<byte>(buffer);
-            while (WebSocketState.Open == _socket.State)
-            {
-                var messageTask = await _socket.ReceiveAsync(bufferSegment, cancellationToken);
-                switch (messageTask.MessageType)
-                {
-                    case WebSocketMessageType.Close:
-                        break;
-                }
-
-                var messageSize = messageTask.Count;
-                while (!messageTask.EndOfMessage)
-                {
-                    if (buffer.Length <= messageSize)
-                    {
-                        // TODO: Handle Invalid Payload
-                        await _socket.CloseAsync(WebSocketCloseStatus.InvalidPayloadData, @"Buffer exceeded!", CancellationToken.None);
-                        return;
-                    }
-
-                    bufferSegment = new ArraySegment<byte>(buffer, messageSize, buffer.Length - messageSize);
-                    messageTask = await _socket.ReceiveAsync(bufferSegment, cancellationToken);
-                    messageSize += messageTask.Count;
-                }
-
-                // TODO: Analyze message
-                var receivedBytes = bufferSegment.Skip<byte>(bufferSegment.Offset).Take<byte>(messageSize).ToArray<byte>();
-                graphicsBuilder.Visit(new StreamMessage(receivedBytes));
-                if (GraphicsThresold <= graphicsBuilder.Graphics.Count)
-                {
-                    AddGraphicsFromBuilder(graphicsBuilder);
-                }
-            }
-
+            graphicsBuilder.Visit(new StreamMessage(e.Data));
             AddGraphicsFromBuilder(graphicsBuilder);
         }
 

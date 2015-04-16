@@ -52,10 +52,15 @@
   <ItemGroup>
     <Compile Include="GraphicsFromStreamBuilder.cs" />
     <Compile Include="IStreamVisitor.cs" />
+    <Compile Include="IWebSocket.cs" />
+    <Compile Include="LazyWebSocket.cs" />
+    <Compile Include="PlatformWebSocket.cs" />
+    <Compile Include="ReceiveEventArgs.cs" />
     <Compile Include="StreamGraphic.cs" />
     <Compile Include="StreamingLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamMessage.cs" />
+    <Compile Include="WebSocketFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
